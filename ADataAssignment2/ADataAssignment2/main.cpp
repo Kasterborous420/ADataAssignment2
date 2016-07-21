@@ -36,6 +36,10 @@ void ReadCSV()
 			//Read each string to ","
 			//how to check for the end though?
 
+			for (int i = 0; i < line.size(); i++)
+			{
+				
+			}
 
 			cardArray[index] = card;
 			index++;
@@ -47,5 +51,6 @@ void ReadCSV()
 void main()
 {
 	ReadCSV();
+
 	system("pause");
 }
