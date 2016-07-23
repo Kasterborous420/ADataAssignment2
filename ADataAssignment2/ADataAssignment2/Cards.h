@@ -8,10 +8,11 @@ using std::string;
 class CCards
 {
 private:
-	string m_name;
+	string m_Name;
 	int m_Cost;
 	int m_HP;
 	int m_Dmg;
+
 	enum RARITY
 	{
 		COMMON,
@@ -33,6 +34,26 @@ private:
 	};
 
 public:
+
+	//===Getters and Setters===//
+	//-Name
+	void setName(string name);
+	string getName();
+	//-Cost
+	void setCost(int cost);
+	int getCost();
+	//-Health
+	void setHealth(int hp);
+	int getHealth();
+	//-Damage
+	void setDamage(int dmg);
+	int getDamage();
+
+
+
+
+
+
 	CCards();
 	~CCards();
 };
