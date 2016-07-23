@@ -48,6 +48,15 @@ public:
 	//-Damage
 	void setDamage(int dmg);
 	int getDamage();
+	//-Rarity
+	void setRARITY(string rarity);
+	RARITY getRARITY();
+	//-TYPE
+	void setTYPE(string type);
+	TYPE getTYPE();
+	//-TARGETS
+	void setTARGETS(string targets);
+	TARGETS getTARGETS();
 
 
 

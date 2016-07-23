@@ -8,6 +8,7 @@ using std::cout;
 using std::endl;
 using std::getline;
 using std::ofstream;
+using std::stoi;
 
 //File To Read//
 std::ifstream FileToRead;
@@ -44,7 +45,7 @@ void ReadCSV()
 			for (int i = 0; i <= line.size(); i++)
 			{
 				string dataString = "";
-				if (line[i] == ',')
+				if (line[i] == ',' || line[i] == '\0')
 				{
 					dataString = line.substr(0, i);
 					line.erase(0, i + 1);
@@ -55,16 +56,25 @@ void ReadCSV()
 					}
 					else if (card->getCost() == NULL)
 					{
-
+						card->setCost(stoi(dataString, nullptr, 10));
 					}
-
-					system("pause");
+					else if (card->getRARITY() == NULL)
+					{
+						card->setRARITY(dataString);
+					}
+					else if (card->getTYPE() == NULL)
+					{
+						card->setTYPE(dataString);
+					}
+					else if (card->getTARGETS() == NULL)
+					{
+						card->setTARGETS(dataString);
+					}
+					else if (card->getHealth() == NULL)
+					{
+						card->setHealth(stoi(dataString, nullptr, 10));
+					}
 				}
-				else if (i == line.size())
-				{
-					cout << line << endl;
-				}
-
 			}
 
 			cardArray[index] = *card;
