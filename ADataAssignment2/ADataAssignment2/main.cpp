@@ -15,6 +15,7 @@ std::ifstream FileToRead;
 std::ifstream FileSize;
 
 
+
 void ReadCSV()
 {
 	FileToRead.open("CR_Cards.csv");

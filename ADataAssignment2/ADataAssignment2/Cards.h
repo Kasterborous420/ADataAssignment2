@@ -13,6 +13,9 @@ private:
 	int m_HP;
 	int m_Dmg;
 
+
+public:
+
 	enum RARITY
 	{
 		COMMON,
@@ -32,8 +35,6 @@ private:
 		BULIDINGS,
 		NA
 	};
-
-public:
 
 	//===Getters and Setters===//
 	//-Name

@@ -1,4 +1,5 @@
 #include "Cards.h"
+#include <ctype.h>
 
 
 CCards::CCards()
@@ -52,4 +53,40 @@ void CCards::setDamage(int dmg)
 int CCards::getDamage()
 {
 	return this->m_Dmg;
+}
+
+//-Rarity
+void CCards::setRARITY(string rarity)
+{
+	for (int i = 0; i < rarity.size(); i++)
+	{
+		char c = rarity[i];
+		putchar(tolower(c));
+	}
+	RARITY Rarity;
+	Rarity = COMMON;
+}
+CCards::RARITY CCards::getRARITY()
+{
+
+}
+
+//-TYPE
+void CCards::setTYPE(string type)
+{
+
+}
+CCards::TYPE CCards::getTYPE()
+{
+
+}
+
+//-TARGETS
+void CCards::setTARGETS(string targets)
+{
+
+}
+CCards::TARGETS CCards::getTARGETS()
+{
+
 }
