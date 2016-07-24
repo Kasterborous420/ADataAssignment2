@@ -20,22 +20,28 @@ public:
 	{
 		COMMON,
 		RARE,
-		EPIC
+		EPIC, 
+		NULL_ENUMRARITY
 	};
 	enum TYPE
 	{
 		TROOP,
 		BUILDING,
-		SPELL
+		SPELL,
+		NULL_ENUMTYPE
 	};
 	enum TARGETS
 	{
 		GROUND,
 		AG,
-		BULIDINGS,
-		NA
+		BUILDINGS,
+		NA,
+		NULL_ENUMTARGET
 	};
 
+	RARITY wayneIsGay; //Giggs told me to do this(I SWEAR) IM FUCKING STRAIGHT GIGGS
+	TYPE type;
+	TARGETS target;
 	//===Getters and Setters===//
 	//-Name
 	void setName(string name);
@@ -51,13 +57,16 @@ public:
 	int getDamage();
 	//-Rarity
 	void setRARITY(string rarity);
-	RARITY getRARITY();
+	string getRARITY();
 	//-TYPE
 	void setTYPE(string type);
-	TYPE getTYPE();
+	string getTYPE();
 	//-TARGETS
 	void setTARGETS(string targets);
-	TARGETS getTARGETS();
+	string getTARGETS();
+
+
+	friend std::ostream& operator<<(std::ostream& os,  CCards& card);
 
 
 

@@ -14,28 +14,32 @@ using std::stoi;
 std::ifstream FileToRead;
 std::ifstream FileSize;
 
+int size = 0;
 
+CCards *cardArray;
 
+//Read CSV and parse into CCards object
 void ReadCSV()
 {
 	FileToRead.open("CR_Cards.csv");
 	FileSize.open("CR_Cards.csv");
 	
 	string line;
-	int size = 0;
 
 	while (getline(FileSize, line))
 	{
 		size++;
 	}
+	cardArray = new CCards[size];
 
 	if (FileToRead.is_open())
 	{
-		CCards *cardArray = new CCards[size];
+		
+		
+		int index = 0;
 
 		while (getline(FileToRead, line))
 		{
-			int index = 0;
 
 			CCards *card = new CCards();
 
@@ -43,51 +47,61 @@ void ReadCSV()
 			//how to check for the end though?
 
 			//Get Card Name
-			for (int i = 0; i <= line.size(); i++)
+			for (int i = 0; i <= line.length(); i++)
 			{
 				string dataString = "";
 				if (line[i] == ',' || line[i] == '\0')
 				{
 					dataString = line.substr(0, i);
 					line.erase(0, i + 1);
+					i = 0;
 
-					if (card->getName() == "")
+					if (cardArray[index].getName() == "")
 					{
-						card->setName(dataString);
+						cardArray[index].setName(dataString);
 					}
-					else if (card->getCost() == NULL)
+					else if (cardArray[index].getCost() == 0)
 					{
-						card->setCost(stoi(dataString, nullptr, 10));
+						cardArray[index].setCost(stoi(dataString, nullptr, 10));
 					}
-					else if (card->getRARITY() == NULL)
+					else if (cardArray[index].getRARITY() == "")
 					{
-						card->setRARITY(dataString);
+						cardArray[index].setRARITY(dataString);
 					}
-					else if (card->getTYPE() == NULL)
+					else if (cardArray[index].getTYPE() == "")
 					{
-						card->setTYPE(dataString);
+						cardArray[index].setTYPE(dataString);
 					}
-					else if (card->getTARGETS() == NULL)
+					else if (cardArray[index].getTARGETS() == "")
 					{
-						card->setTARGETS(dataString);
+						cardArray[index].setTARGETS(dataString);
 					}
-					else if (card->getHealth() == NULL)
+					else if (cardArray[index].getHealth() == 0)
 					{
-						card->setHealth(stoi(dataString, nullptr, 10));
+						cardArray[index].setHealth(stoi(dataString, nullptr, 10));
+					}
+					else if (cardArray[index].getDamage() == 0)
+					{
+						cardArray[index].setDamage(stoi(dataString, nullptr, 10));
 					}
 				}
 			}
 
-			cardArray[index] = *card;
+			/*cardArray[index] = *card;*/
 			index++;
 
 		}
 		FileToRead.close();
 	}
 }
+
+
 void main()
 {
 	ReadCSV();
-
+	for (int i = 0; i < size; i++)
+	{
+		cout << cardArray[i] << endl;
+	}
 	system("pause");
 }
