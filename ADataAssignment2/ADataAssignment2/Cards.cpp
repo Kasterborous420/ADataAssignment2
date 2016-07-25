@@ -178,6 +178,6 @@ string CCards::getTARGETS()
 //Operator Overloading
 std::ostream& operator<<(std::ostream& os,  CCards& card)
 {
-	os << card.getName();
+	os << card.getName() << ", " << card.getCost() << ", " << card.getRARITY() << ", " << card.getTYPE() << ", " << card.getTARGETS() << ", " << card.getHealth() << ", " << card.getDamage();
 	return os;
 }

@@ -52,10 +52,12 @@ void ReadCSV()
 				string dataString = "";
 				if (line[i] == ',' || line[i] == '\0')
 				{
+					//Separate and Erase the line from file
 					dataString = line.substr(0, i);
 					line.erase(0, i + 1);
 					i = 0;
 
+					//Parse String into Variables
 					if (cardArray[index].getName() == "")
 					{
 						cardArray[index].setName(dataString);
@@ -87,7 +89,7 @@ void ReadCSV()
 				}
 			}
 
-			/*cardArray[index] = *card;*/
+			//increment cardArray[index]
 			index++;
 
 		}
