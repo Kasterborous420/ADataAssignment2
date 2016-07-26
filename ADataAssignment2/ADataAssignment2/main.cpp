@@ -97,13 +97,94 @@ void ReadCSV()
 	}
 }
 
-
-void main()
+void RenderMenu()
 {
-	ReadCSV();
+	system("cls");
+
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	cout << "~ Clash Royale Card Sort System ~" << endl;
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+	cout << "(1) Display ALL!" << endl;
+	cout << "(2) Sort Cards!" << endl;
+	cout << "(3) Search for Cards!" << endl;
+	cout << "(4) Quit" << endl;
+
+}
+
+void DisplayAll()
+{
 	for (int i = 0; i < size; i++)
 	{
 		cout << cardArray[i] << endl;
 	}
+}
+
+void Sort(int _choice, int _displayChoice)
+{
+	if (_choice == 1)
+	{
+
+	}
+	else if (_choice == 2)
+	{
+
+	}
+}
+void RenderSortMenu()
+{
+	
+	cout << "< Sort Display >" << endl;
+
+
+	cout << "(1) Card Name" << endl;
+	cout << "(2) Elixir Cost" << endl;
+	cout << "(3) Rarity" << endl;
+	cout << "(4) Type" << endl;
+	cout << "(5) Targets" << endl;
+	cout << "(6) Hitpoints" << endl;
+	cout << "(7) Damage" << endl;
+	
+	int _choice = 0;
+	int _displayChoice = 0;
+
+	cout << "Enter Choice: ";
+	cin >> _choice;
+	cout << "Ascending(1) or Descending(2)";
+	cin >> _displayChoice;
+
+	Sort(_choice, _displayChoice);
+
+}
+void RenderSearchMenu()
+{
+
+}
+void UserInput()
+{
+	int choice = 0;
+	cin >> choice;
+
+	switch (choice)
+	{
+	case 1:
+		DisplayAll();
+		break;
+	case 2:
+		RenderSortMenu();
+		break;
+	case 3:
+		RenderSearchMenu();
+	case 4:
+		exit(0);
+	}
+}
+
+void main()
+{
+	ReadCSV();
+	RenderMenu();
+	UserInput();
+
 	system("pause");
 }
