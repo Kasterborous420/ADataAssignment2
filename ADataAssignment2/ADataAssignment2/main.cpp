@@ -3,21 +3,32 @@
 #include <fstream>
 #include <string>
 #include "Cards.h"
+#include <vector>
+
 using std::cin;
 using std::cout;
 using std::endl;
 using std::getline;
 using std::ofstream;
 using std::stoi;
+using std::vector;
 
 //File To Read//
 std::ifstream FileToRead;
 std::ifstream FileSize;
 
 int size = 0;
+bool running = true;
 
 CCards *cardArray;
+vector<CCards> searchResult;
 
+//Flush cin buffer
+void FlushBuffer()
+{
+	cin.clear();
+	fflush(stdin);
+}
 //Read CSV and parse into CCards object
 void ReadCSV()
 {
@@ -110,33 +121,243 @@ void RenderMenu()
 	cout << "(3) Search for Cards!" << endl;
 	cout << "(4) Quit" << endl;
 
+	cout << "Enter Choice: ";
+
 }
 
-void DisplayAll()
+void DisplayAll( int _displayChoice )
 {
-	for (int i = 0; i < size; i++)
+	cout << endl;
+
+	if (_displayChoice == 1)
 	{
-		cout << cardArray[i] << endl;
+		for (int i = 0; i < size; i++)
+		{
+			cout << "[" << i + 1 << "] " << cardArray[i] << endl;
+		}
 	}
+	else if (_displayChoice == 2)
+	{
+		for (int i = size; i <= 0; i--)
+		{
+			cout << "[" << i + 1 << "] " << cardArray[i] << endl;
+		}
+	}
+
+	cout << endl;
+	cout << endl;
+
+	system("pause");
+	
 }
 
-void Sort(int _choice, int _displayChoice)
+void Sort(int _choice)
 {
+	//Sort By Card Name
 	if (_choice == 1)
 	{
+		for (int i = 0; i < size; i++)
+		{
+			for (int index = 0; index + 1 < size - i; index++)
+			{
 
+				if (cardArray[index].getName() > cardArray[index + 1].getName())
+				{
+					//Big Swap
+					CCards temp = cardArray[index];
+					cardArray[index] = cardArray[index + 1];
+					cardArray[index + 1] = temp;
+				}
+			}
+		}
 	}
+	//Sort by Elixir Cost
 	else if (_choice == 2)
 	{
+		for (int i = 0; i < size; i++)
+		{
+			for (int index = 0; index + 1 < size - i; index++)
+			{
 
+				if (cardArray[index].getCost() > cardArray[index + 1].getCost())
+				{
+					//Big Swap
+					CCards temp = cardArray[index];
+					cardArray[index] = cardArray[index + 1];
+					cardArray[index + 1] = temp;
+				}
+			}
+		}
+	}
+	//Sort by Rarity
+	else if (_choice == 3)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			for (int index = 0; index + 1 < size - i; index++)
+			{
+
+				if (cardArray[index].getRARITY() > cardArray[index + 1].getRARITY())
+				{
+					//Big Swap
+					CCards temp = cardArray[index];
+					cardArray[index] = cardArray[index + 1];
+					cardArray[index + 1] = temp;
+				}
+			}
+		}
+	}
+	//Sort by Type
+	else if (_choice == 4)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			for (int index = 0; index + 1 < size - i; index++)
+			{
+
+				if (cardArray[index].getTYPE() > cardArray[index + 1].getTYPE())
+				{
+					//Big Swap
+					CCards temp = cardArray[index];
+					cardArray[index] = cardArray[index + 1];
+					cardArray[index + 1] = temp;
+				}
+			}
+		}
+	}
+	//Sort by Targets
+	else if (_choice == 5)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			for (int index = 0; index + 1 < size - i; index++)
+			{
+
+				if (cardArray[index].getTARGETS() > cardArray[index + 1].getTARGETS())
+				{
+					//Big Swap
+					CCards temp = cardArray[index];
+					cardArray[index] = cardArray[index + 1];
+					cardArray[index + 1] = temp;
+				}
+			}
+		}
+	}
+	//Sort by Hitpoints
+	else if (_choice == 6)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			for (int index = 0; index + 1 < size - i; index++)
+			{
+
+				if (cardArray[index].getHealth() > cardArray[index + 1].getHealth())
+				{
+					//Big Swap
+					CCards temp = cardArray[index];
+					cardArray[index] = cardArray[index + 1];
+					cardArray[index + 1] = temp;
+				}
+			}
+		}
+	}
+	//Sort by Damage
+	else if (_choice == 7)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			for (int index = 0; index + 1 < size - i; index++)
+			{
+
+				if (cardArray[index].getDamage() > cardArray[index + 1].getDamage())
+				{
+					//Big Swap
+					CCards temp = cardArray[index];
+					cardArray[index] = cardArray[index + 1];
+					cardArray[index + 1] = temp;
+				}
+			}
+		}
+	}
+
+}
+
+void Search(int _choice, int _choiceValue, int _choice2, int _choiceValue2, string _enumString, string _enumString2)
+{
+	//Search By Elixir Cost
+	if (_choice == 1)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (cardArray[i].getCost() == _value)
+			{
+				searchResult.push_back(cardArray[i]);
+			}
+		}
+	}
+	//Search by Rarity
+	else if (_choice == 2)
+	{
+		for (int i = 0; i < size; i++)
+		{
+
+			if (cardArray[i].getRARITY() == _enumSearch)
+			{
+				searchResult.push_back(cardArray[i]);
+			}
+		}
+	}
+	//Sort by Type
+	else if (_choice == 3)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (cardArray[i].getTYPE() == _enumSearch)
+			{
+				searchResult.push_back(cardArray[i]);
+			}
+		}
+	}
+	//Sort by Target
+	else if (_choice == 4)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (cardArray[i].getTARGETS() == _enumSearch)
+			{
+				searchResult.push_back(cardArray[i]);
+			}
+		}
+	}
+	//Sort by HP
+	else if (_choice == 5)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (cardArray[i].getHealth() == _value)
+			{
+				searchResult.push_back(cardArray[i]);
+			}
+		}
+	}
+	//Sort by Damage
+	else if (_choice == 6)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (cardArray[i].getDamage() == _value)
+			{
+				searchResult.push_back(cardArray[i]);
+			}
+		}
 	}
 }
+
 void RenderSortMenu()
 {
-	
+	cout << endl;
+
 	cout << "< Sort Display >" << endl;
-
-
 	cout << "(1) Card Name" << endl;
 	cout << "(2) Elixir Cost" << endl;
 	cout << "(3) Rarity" << endl;
@@ -153,38 +374,118 @@ void RenderSortMenu()
 	cout << "Ascending(1) or Descending(2)";
 	cin >> _displayChoice;
 
-	Sort(_choice, _displayChoice);
+	Sort(_choice);
+	DisplayAll(_displayChoice);
+
+	cout << endl;
+	cout << endl;
+
+	system("pause");
 
 }
 void RenderSearchMenu()
 {
+	cout << "< Search >" << endl;
+	cout << "< Add First Condition >" << endl;
+	cout << "(1) Elixir Cost" << endl;
+	cout << "(2) Rarity" << endl;
+	cout << "(3) Type" << endl;
+	cout << "(4) Targets" << endl;
+	cout << "(5) Hitpoints" << endl;
+	cout << "(6) Damage" << endl;
 
+	int _choice = 0;
+	int _choiceValue = 0;
+	int _choiceValue2 = 0;
+	int _displayChoice = 0;
+	int _displayValue = 0;
+	string _enumString = "";
+	string _enumString2 = "";
+
+	cout << "Condition 1: ";
+	cin >> _choice;
+	cin >> _choiceValue;
+
+	if (_choice == 1 || _choice == 5 || _choice == 6)
+	{
+		cin >> _choiceValue;
+	}
+	else if (_choice > 1 && _choice < 5)
+	{
+		cin >> _enumString;
+	}
+	else
+	{
+		cout << "Condition Not Found" << endl;
+	}
+
+
+	cout << "Add Second Condition" << endl;
+	cout << "(1) Elixir Cost" << endl;
+	cout << "(2) Rarity" << endl;
+	cout << "(3) Type" << endl;
+	cout << "(4) Targets" << endl;
+	cout << "(5) Hitpoints" << endl;
+	cout << "(6) Damage" << endl;
+	cout << "(7) None" << endl;
+
+	cout << "Condition 2: ";
+	int _choice2 = 0;
+	cin >> _choice2;
+
+	if (_choice2 == 1 || _choice2 == 5 || _choice2 == 6)
+	{
+		cin >> _choiceValue2;
+	}
+	else if (_choice2 > 1 && _choice2 < 5)
+	{
+		cin >> _enumString2;
+	}
+	else
+	{
+		cout << "Condition Not Found" << endl;
+	}
+	
+
+	Search( _choice, _choiceValue, _choice2, _choiceValue2, _enumString, _enumString2);
+	for (int i = 0; i < searchResult.size(); i++)
+	{
+		cout << searchResult[i] << endl;
+	}
+
+	system("pause");
 }
 void UserInput()
 {
+	FlushBuffer();
 	int choice = 0;
 	cin >> choice;
 
 	switch (choice)
 	{
 	case 1:
-		DisplayAll();
+		DisplayAll(1);
 		break;
 	case 2:
 		RenderSortMenu();
 		break;
 	case 3:
 		RenderSearchMenu();
+		break;
 	case 4:
-		exit(0);
+		running = false;
 	}
 }
 
 void main()
 {
 	ReadCSV();
-	RenderMenu();
-	UserInput();
-
+	while (running)
+	{
+		RenderMenu();
+		UserInput();
+	}
+	
+	cout << "Application Closing" << endl;
 	system("pause");
 }

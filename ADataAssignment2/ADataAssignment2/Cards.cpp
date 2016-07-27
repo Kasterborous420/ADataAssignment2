@@ -28,7 +28,7 @@ void CCards::setName(string name)
 }
 string CCards::getName()
 {
-	return this->m_Name;
+	return m_Name;
 }
 
 //-Cost
@@ -38,7 +38,7 @@ void CCards::setCost(int cost)
 }
 int CCards::getCost()
 {
-	return this->m_Cost;
+	return m_Cost;
 }
 
 //-Health
@@ -48,7 +48,7 @@ void CCards::setHealth(int hp)
 }
 int CCards::getHealth()
 {
-	return this->m_HP;
+	return m_HP;
 }
 
 //-Damage
@@ -58,7 +58,7 @@ void CCards::setDamage(int dmg)
 }
 int CCards::getDamage()
 {
-	return this->m_Dmg;
+	return m_Dmg;
 }
 
 //-Rarity
@@ -82,13 +82,13 @@ string CCards::getRARITY()
 	switch (wayneIsGay)
 	{
 		case COMMON:
-			return "common";
+			return "Common";
 
 		case RARE:
-			return "rare";
+			return "Rare";
 
 		case EPIC:
-			return "epic";
+			return "Epic";
 
 		case NULL_ENUMRARITY:
 			return "";
@@ -117,13 +117,13 @@ string CCards::getTYPE()
 	switch (type)
 	{
 	case TROOP:
-		return "troop";
+		return "Troop";
 
 	case BUILDING:
-		return "building";
+		return "Buildings";
 
 	case SPELL:
-		return "spell";
+		return "Spell";
 
 	case NULL_ENUMTYPE:
 		return "";
@@ -157,16 +157,16 @@ string CCards::getTARGETS()
 	switch (target)
 	{
 	case GROUND:
-		return "ground";
+		return "Ground";
 
 	case AG:
-		return "ag";
+		return "AG";
 
 	case BUILDINGS:
-		return "buildings";
+		return "Buildings";
 
 	case NA:
-		return "na";
+		return "NA";
 
 	case NULL_ENUMTARGET:
 		return "";
