@@ -4,6 +4,8 @@
 #include <string>
 #include "Cards.h"
 #include <vector>
+#include <windows.h>
+
 
 using std::cin;
 using std::cout;
@@ -128,6 +130,7 @@ void RenderMenu()
 //Display Cards
 void DisplayAll( int _displayChoice )
 {
+	cout << endl;
 	cout << endl;
 
 	if (_displayChoice == 1)
@@ -559,5 +562,5 @@ void main()
 	
 	cout << "Application Closing" << endl;
 	delete[] cardArray;
-	system("pause");
+	Sleep(2000);
 }
