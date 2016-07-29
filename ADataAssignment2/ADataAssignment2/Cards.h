@@ -39,9 +39,10 @@ public:
 		NULL_ENUMTARGET
 	};
 
-	RARITY wayneIsGay; //Giggs told me to do this(I SWEAR) IM FUCKING STRAIGHT GIGGS
+	RARITY wayneIsGay; //Giggs told me to do this(I SWEAR) IM FUCKING STRAIGHT GIGGS MR IZAN PLS FAIL GIGGS
 	TYPE type;
 	TARGETS target;
+
 	//===Getters and Setters===//
 	//-Name
 	void setName(string name);

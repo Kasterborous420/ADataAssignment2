@@ -29,6 +29,7 @@ void FlushBuffer()
 	cin.clear();
 	fflush(stdin);
 }
+
 //Read CSV and parse into CCards object
 void ReadCSV()
 {
@@ -45,8 +46,6 @@ void ReadCSV()
 
 	if (FileToRead.is_open())
 	{
-		
-		
 		int index = 0;
 
 		while (getline(FileToRead, line))
@@ -108,6 +107,7 @@ void ReadCSV()
 	}
 }
 
+//Render Menu
 void RenderMenu()
 {
 	system("cls");
@@ -125,6 +125,7 @@ void RenderMenu()
 
 }
 
+//Display Cards
 void DisplayAll( int _displayChoice )
 {
 	cout << endl;
@@ -138,19 +139,19 @@ void DisplayAll( int _displayChoice )
 	}
 	else if (_displayChoice == 2)
 	{
-		for (int i = size; i <= 0; i--)
+		for (int i = size; i > 0; i--)
 		{
-			cout << "[" << i + 1 << "] " << cardArray[i] << endl;
+			cout << "[" << i  << "] " << cardArray[i - 1] << endl;
 		}
 	}
 
 	cout << endl;
 	cout << endl;
-
-	system("pause");
 	
+	system("pause");
 }
 
+//Sort Cards
 void Sort(int _choice)
 {
 	//Sort By Card Name
@@ -282,14 +283,20 @@ void Sort(int _choice)
 
 }
 
+//Search Cards
 void Search(int _choice, int _choiceValue, int _choice2, int _choiceValue2, string _enumString, string _enumString2)
 {
+	//==SEARCH FOR FIRST CONDITION AND ADD THEM TO THE VECTOR==//
+	
+	//Clear Vector
+	searchResult.clear();
+
 	//Search By Elixir Cost
 	if (_choice == 1)
 	{
 		for (int i = 0; i < size; i++)
 		{
-			if (cardArray[i].getCost() == _value)
+			if (cardArray[i].getCost() == _choiceValue)
 			{
 				searchResult.push_back(cardArray[i]);
 			}
@@ -300,59 +307,117 @@ void Search(int _choice, int _choiceValue, int _choice2, int _choiceValue2, stri
 	{
 		for (int i = 0; i < size; i++)
 		{
-
-			if (cardArray[i].getRARITY() == _enumSearch)
+			if (cardArray[i].getRARITY() == _enumString)
 			{
 				searchResult.push_back(cardArray[i]);
 			}
 		}
 	}
-	//Sort by Type
+	//Search by Type
 	else if (_choice == 3)
 	{
 		for (int i = 0; i < size; i++)
 		{
-			if (cardArray[i].getTYPE() == _enumSearch)
+			if (cardArray[i].getTYPE() == _enumString)
 			{
 				searchResult.push_back(cardArray[i]);
 			}
 		}
 	}
-	//Sort by Target
+	//Search by Target
 	else if (_choice == 4)
 	{
 		for (int i = 0; i < size; i++)
 		{
-			if (cardArray[i].getTARGETS() == _enumSearch)
+			if (cardArray[i].getTARGETS() == _enumString)
 			{
 				searchResult.push_back(cardArray[i]);
 			}
 		}
 	}
-	//Sort by HP
+	//Search by HP
 	else if (_choice == 5)
 	{
 		for (int i = 0; i < size; i++)
 		{
-			if (cardArray[i].getHealth() == _value)
+			if (cardArray[i].getHealth() == _choiceValue)
 			{
 				searchResult.push_back(cardArray[i]);
 			}
 		}
 	}
-	//Sort by Damage
+	//Search by Damage
 	else if (_choice == 6)
 	{
 		for (int i = 0; i < size; i++)
 		{
-			if (cardArray[i].getDamage() == _value)
+			if (cardArray[i].getDamage() == _choiceValue)
 			{
 				searchResult.push_back(cardArray[i]);
 			}
 		}
 	}
+
+	if (_choice2 < 7 && _choice2 > 0)
+	{
+		//==GO THROUGH THE VECTOR AND REMOVE THOSE WHO DO NOT MEET THE SECOND CONDITION==//
+		for (int i = 0; i < searchResult.size(); i++)
+		{
+			//Search Cost (Condition 2)
+			if (_choice2 == 1)
+			{
+				if (searchResult[i].getCost() != _choiceValue2)
+				{
+					searchResult.erase(searchResult.begin() + i);
+					i -= 1;
+				}
+			}
+			else if (_choice2 == 2)
+			{
+				if (searchResult[i].getRARITY() != _enumString2)
+				{
+					searchResult.erase(searchResult.begin() + i);
+					i -= 1;
+				}
+			}
+			else if (_choice2 == 3)
+			{
+				if (searchResult[i].getTYPE() != _enumString2)
+				{
+					searchResult.erase(searchResult.begin() + i);
+					i -= 1;
+				}
+			}
+			else if (_choice2 == 4)
+			{
+				if (searchResult[i].getTARGETS() != _enumString2)
+				{
+					searchResult.erase(searchResult.begin() + i);
+					i -= 1;
+				}
+			}
+			else if (_choice2 == 5)
+			{
+				if (searchResult[i].getHealth() != _choiceValue2)
+				{
+					searchResult.erase(searchResult.begin() + i);
+					i -= 1;
+				}
+			}
+			else if (_choice2 == 6)
+			{
+				if (searchResult[i].getDamage() != _choiceValue2)
+				{
+					searchResult.erase(searchResult.begin() + i);
+					i -= 1;
+				}
+			}
+		}
+	}
+
 }
 
+//Render Sorting Menu
 void RenderSortMenu()
 {
 	cout << endl;
@@ -380,11 +445,14 @@ void RenderSortMenu()
 	cout << endl;
 	cout << endl;
 
-	system("pause");
 
 }
+
+//Render Searching Menu
 void RenderSearchMenu()
 {
+	cout << endl;
+
 	cout << "< Search >" << endl;
 	cout << "< Add First Condition >" << endl;
 	cout << "(1) Elixir Cost" << endl;
@@ -404,8 +472,7 @@ void RenderSearchMenu()
 
 	cout << "Condition 1: ";
 	cin >> _choice;
-	cin >> _choiceValue;
-
+	cout << "Condition Value: ";
 	if (_choice == 1 || _choice == 5 || _choice == 6)
 	{
 		cin >> _choiceValue;
@@ -433,6 +500,8 @@ void RenderSearchMenu()
 	int _choice2 = 0;
 	cin >> _choice2;
 
+	cout << "Condition Value: ";
+
 	if (_choice2 == 1 || _choice2 == 5 || _choice2 == 6)
 	{
 		cin >> _choiceValue2;
@@ -443,7 +512,7 @@ void RenderSearchMenu()
 	}
 	else
 	{
-		cout << "Condition Not Found" << endl;
+		cout << "No Condition" << endl;
 	}
 	
 
@@ -455,6 +524,8 @@ void RenderSearchMenu()
 
 	system("pause");
 }
+
+//Render UserInput
 void UserInput()
 {
 	FlushBuffer();
@@ -487,5 +558,6 @@ void main()
 	}
 	
 	cout << "Application Closing" << endl;
+	delete[] cardArray;
 	system("pause");
 }
